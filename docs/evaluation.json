@@ -1,0 +1,54 @@
+{
+  "data_kind": "H&M competition data",
+  "seed": 42,
+  "k": 12,
+  "training_labels_start": "2020-09-09",
+  "evaluation_labels_start": "2020-09-16",
+  "evaluation_labels_end_exclusive": "2020-09-23",
+  "evaluation_feature_max_date": "2020-09-15",
+  "training_feature_max_date": "2020-09-08",
+  "runtime": {
+    "python": "3.13.15",
+    "numpy": "2.1.3",
+    "pandas": "2.3.3",
+    "scikit_learn": "1.6.1"
+  },
+  "training_population": 72019,
+  "evaluation_population": 68984,
+  "sampling": "Seeded uniform sample of customers purchasing in each label week; includes cold customers. Zero means all.",
+  "ranking_training": {
+    "rows": 296206,
+    "positives": 1095,
+    "features": [
+      "popularity_7d",
+      "popularity_28d",
+      "repeat_recency",
+      "repeat_count",
+      "category_affinity",
+      "transition_score"
+    ]
+  },
+  "source": {
+    "source_rows": 31788324,
+    "loaded_rows": 4453834,
+    "lookback_days": 98,
+    "source_max_date": "2020-09-22"
+  },
+  "map_at_12": {
+    "popular": 0.008542594147775424,
+    "hybrid": 0.029296725274284802,
+    "learned": 0.027653951593860682
+  },
+  "learned_minus_popular_95pct_bootstrap_ci": [
+    0.015430784742407062,
+    0.02263245121450669
+  ],
+  "candidate_recall": 0.14978504126214343,
+  "catalogue_coverage": 0.1032215801417776,
+  "evaluated_users": 5000,
+  "cold_users": 1275,
+  "cold_map_at_12": 0.00798927621553672,
+  "warm_map_at_12": 0.03438481363610581,
+  "hyperparameter_policy": "Fixed parameters before holdout evaluation; no holdout tuning or model selection.",
+  "elapsed_seconds": 150.38
+}
