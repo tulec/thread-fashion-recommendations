@@ -1,0 +1,347 @@
+{
+  "data_kind": "H&M competition data",
+  "seed": 42,
+  "history_days": 98,
+  "train_users_limit": 3000,
+  "eval_users_limit": 5000,
+  "source": {
+    "source_rows": 31788324,
+    "loaded_rows": 6114608,
+    "lookback_days": 133,
+    "source_max_date": "2020-09-22"
+  },
+  "weeks": [
+    {
+      "start": "2020-08-26",
+      "end_exclusive": "2020-09-02",
+      "role": "development",
+      "evaluated_users": 5000,
+      "population": 80253,
+      "training_users": 3000,
+      "training_population": 72035,
+      "training_labels_start": "2020-08-19",
+      "variants": {
+        "original": {
+          "map_at_12": {
+            "popular": 0.007717007120524977,
+            "hybrid": 0.024245056652122125,
+            "learned": 0.023598911043541997
+          },
+          "candidate_recall": 0.14569748037823887,
+          "mean_candidates": 100.5678,
+          "cold_users": 1270,
+          "cold_map_at_12": 0.005974306884529044,
+          "warm_map_at_12": 0.029599781628514236,
+          "feature_max_date": "2020-08-25",
+          "training_feature_max_date": "2020-08-18",
+          "training": {
+            "rows": 306383,
+            "positives": 1073,
+            "features": [
+              "popularity_7d",
+              "popularity_28d",
+              "repeat_recency",
+              "repeat_count",
+              "category_affinity",
+              "transition_score"
+            ]
+          }
+        },
+        "expanded": {
+          "map_at_12": {
+            "popular": 0.007717007120524977,
+            "hybrid": 0.024146959209441352,
+            "learned": 0.022908642525023476
+          },
+          "candidate_recall": 0.22045495925900724,
+          "mean_candidates": 250.0622,
+          "cold_users": 1270,
+          "cold_map_at_12": 0.005974306884529044,
+          "warm_map_at_12": 0.028674488708248125,
+          "feature_max_date": "2020-08-25",
+          "training_feature_max_date": "2020-08-18",
+          "training": {
+            "rows": 759553,
+            "positives": 1714,
+            "features": [
+              "popularity_7d",
+              "popularity_28d",
+              "repeat_recency",
+              "repeat_count",
+              "category_affinity",
+              "transition_score"
+            ]
+          }
+        }
+      },
+      "paired_expanded_minus_original": {
+        "hybrid": {
+          "difference": -9.809744268077236e-05,
+          "ci_95": [
+            -0.0007638646790323873,
+            0.0005529477329273456
+          ]
+        },
+        "learned": {
+          "difference": -0.0006902685185185206,
+          "ci_95": [
+            -0.0018851926336780503,
+            0.0004685936678290831
+          ]
+        }
+      }
+    },
+    {
+      "start": "2020-09-02",
+      "end_exclusive": "2020-09-09",
+      "role": "development",
+      "evaluated_users": 5000,
+      "population": 75822,
+      "training_users": 3000,
+      "training_population": 80253,
+      "training_labels_start": "2020-08-26",
+      "variants": {
+        "original": {
+          "map_at_12": {
+            "popular": 0.0059444134027348315,
+            "hybrid": 0.027370941017576297,
+            "learned": 0.025475629165807735
+          },
+          "candidate_recall": 0.1440430242869072,
+          "mean_candidates": 101.082,
+          "cold_users": 1173,
+          "cold_map_at_12": 0.005776566592088452,
+          "warm_map_at_12": 0.03151351795571438,
+          "feature_max_date": "2020-09-01",
+          "training_feature_max_date": "2020-08-25",
+          "training": {
+            "rows": 301101,
+            "positives": 1181,
+            "features": [
+              "popularity_7d",
+              "popularity_28d",
+              "repeat_recency",
+              "repeat_count",
+              "category_affinity",
+              "transition_score"
+            ]
+          }
+        },
+        "expanded": {
+          "map_at_12": {
+            "popular": 0.0059444134027348315,
+            "hybrid": 0.027485536530268678,
+            "learned": 0.026231024218946835
+          },
+          "candidate_recall": 0.22762258434428376,
+          "mean_candidates": 252.3966,
+          "cold_users": 1173,
+          "cold_map_at_12": 0.005776566592088452,
+          "warm_map_at_12": 0.03250044642859013,
+          "feature_max_date": "2020-09-01",
+          "training_feature_max_date": "2020-08-25",
+          "training": {
+            "rows": 749738,
+            "positives": 1883,
+            "features": [
+              "popularity_7d",
+              "popularity_28d",
+              "repeat_recency",
+              "repeat_count",
+              "category_affinity",
+              "transition_score"
+            ]
+          }
+        }
+      },
+      "paired_expanded_minus_original": {
+        "hybrid": {
+          "difference": 0.00011459551269238019,
+          "ci_95": [
+            -0.0004014667249957834,
+            0.0007051824059433228
+          ]
+        },
+        "learned": {
+          "difference": 0.0007553950531390997,
+          "ci_95": [
+            -0.0005387702975761012,
+            0.0021989764032759565
+          ]
+        }
+      }
+    },
+    {
+      "start": "2020-09-09",
+      "end_exclusive": "2020-09-16",
+      "role": "development",
+      "evaluated_users": 5000,
+      "population": 72019,
+      "training_users": 3000,
+      "training_population": 75822,
+      "training_labels_start": "2020-09-02",
+      "variants": {
+        "original": {
+          "map_at_12": {
+            "popular": 0.006594388533864724,
+            "hybrid": 0.028133853764401386,
+            "learned": 0.028074785505279556
+          },
+          "candidate_recall": 0.13556756134835238,
+          "mean_candidates": 100.9824,
+          "cold_users": 1160,
+          "cold_map_at_12": 0.005697188008199913,
+          "warm_map_at_12": 0.03483468474918903,
+          "feature_max_date": "2020-09-08",
+          "training_feature_max_date": "2020-09-01",
+          "training": {
+            "rows": 301574,
+            "positives": 1100,
+            "features": [
+              "popularity_7d",
+              "popularity_28d",
+              "repeat_recency",
+              "repeat_count",
+              "category_affinity",
+              "transition_score"
+            ]
+          }
+        },
+        "expanded": {
+          "map_at_12": {
+            "popular": 0.006594388533864724,
+            "hybrid": 0.0282690024107286,
+            "learned": 0.02722096610404186
+          },
+          "candidate_recall": 0.21303112487018672,
+          "mean_candidates": 252.0686,
+          "cold_users": 1160,
+          "cold_map_at_12": 0.005697188008199913,
+          "warm_map_at_12": 0.03372294073716078,
+          "feature_max_date": "2020-09-08",
+          "training_feature_max_date": "2020-09-01",
+          "training": {
+            "rows": 751577,
+            "positives": 1890,
+            "features": [
+              "popularity_7d",
+              "popularity_28d",
+              "repeat_recency",
+              "repeat_count",
+              "category_affinity",
+              "transition_score"
+            ]
+          }
+        }
+      },
+      "paired_expanded_minus_original": {
+        "hybrid": {
+          "difference": 0.0001351486463272121,
+          "ci_95": [
+            -0.0005986678129079915,
+            0.0007794624488936988
+          ]
+        },
+        "learned": {
+          "difference": -0.0008538194012376946,
+          "ci_95": [
+            -0.002299833441155005,
+            0.00070369346560326
+          ]
+        }
+      }
+    },
+    {
+      "start": "2020-09-16",
+      "end_exclusive": "2020-09-23",
+      "role": "previously_seen_confirmation",
+      "evaluated_users": 5000,
+      "population": 68984,
+      "training_users": 3000,
+      "training_population": 72019,
+      "training_labels_start": "2020-09-09",
+      "variants": {
+        "original": {
+          "map_at_12": {
+            "popular": 0.008542594147775424,
+            "hybrid": 0.029241047424356948,
+            "learned": 0.027674222067614926
+          },
+          "candidate_recall": 0.15045837459547676,
+          "mean_candidates": 99.5666,
+          "cold_users": 1201,
+          "cold_map_at_12": 0.007517724806219512,
+          "warm_map_at_12": 0.03404641296283363,
+          "feature_max_date": "2020-09-15",
+          "training_feature_max_date": "2020-09-08",
+          "training": {
+            "rows": 303116,
+            "positives": 1107,
+            "features": [
+              "popularity_7d",
+              "popularity_28d",
+              "repeat_recency",
+              "repeat_count",
+              "category_affinity",
+              "transition_score"
+            ]
+          }
+        },
+        "expanded": {
+          "map_at_12": {
+            "popular": 0.008542594147775424,
+            "hybrid": 0.02900509378754563,
+            "learned": 0.028323290178376214
+          },
+          "candidate_recall": 0.23124460822124585,
+          "mean_candidates": 247.2048,
+          "cold_users": 1201,
+          "cold_map_at_12": 0.007517724806219512,
+          "warm_map_at_12": 0.0349006747564126,
+          "feature_max_date": "2020-09-15",
+          "training_feature_max_date": "2020-09-08",
+          "training": {
+            "rows": 755712,
+            "positives": 1848,
+            "features": [
+              "popularity_7d",
+              "popularity_28d",
+              "repeat_recency",
+              "repeat_count",
+              "category_affinity",
+              "transition_score"
+            ]
+          }
+        }
+      },
+      "paired_expanded_minus_original": {
+        "hybrid": {
+          "difference": -0.0002359536368113195,
+          "ci_95": [
+            -0.0006540170495604884,
+            0.00018042135980501776
+          ]
+        },
+        "learned": {
+          "difference": 0.0006490681107612882,
+          "ci_95": [
+            -0.0007159823143892541,
+            0.0020309556336205285
+          ]
+        }
+      }
+    }
+  ],
+  "selection_policy": "Highest unweighted mean MAP@12 across three development weeks; final week excluded.",
+  "selected_variant": "expanded",
+  "selected_method": "hybrid",
+  "confirmation_map_at_12": 0.02900509378754563,
+  "confirmation_caveat": "2020-09-16 to 2020-09-22 was evaluated in v1; it is not a newly unseen test.",
+  "runtime": {
+    "python": "3.13.15",
+    "numpy": "2.1.3",
+    "pandas": "2.3.3",
+    "sklearn": "1.6.1"
+  },
+  "elapsed_seconds": 999.37
+}

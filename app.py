@@ -27,7 +27,8 @@ def load(path, modified):
     return json.loads(Path(path).read_text(encoding="utf-8"))
 
 
-default_path = "artifacts/real/demo.json" if Path("artifacts/real/demo.json").exists() else "artifacts/demo/demo.json"
+default_path = next((p for p in ["artifacts/selected/demo.json", "artifacts/real/demo.json", "artifacts/demo/demo.json"]
+                     if Path(p).exists()), "artifacts/demo/demo.json")
 source = Path(os.environ.get("FASHION_DEMO_PATH", default_path))
 if not source.exists():
     st.title("THREAD")
@@ -35,6 +36,7 @@ if not source.exists():
     st.stop()
 data = load(str(source), source.stat().st_mtime_ns)
 synthetic = data["data_kind"].startswith("SYNTHETIC")
+personal_label = "Персональный гибрид" if data.get("serving_method") == "hybrid" else "Персональная модель"
 
 with st.sidebar:
     st.markdown("### ◈ THREAD")
@@ -42,7 +44,7 @@ with st.sidebar:
     st.divider()
     user_names = [u["id"] for u in data["users"]]
     selected = st.selectbox("Профиль покупателя", ["Новый покупатель"] + user_names)
-    method = st.radio("Подход", ["Персональная модель", "Популярные товары"])
+    method = st.radio("Подход", [personal_label, "Популярные товары"])
     st.divider()
     st.caption("Горизонт прогноза: 7 дней")
     st.caption(f"История до {data['as_of']} (не включая дату)")
@@ -65,12 +67,14 @@ cols[2].metric("MAP@12 · модель", f"{metrics['learned']:.4f}")
 cols[3].metric("Покупателей в проверке", f"{data['metrics']['evaluated_users']:,}")
 st.caption("Метрики выше рассчитаны на отложенной неделе. Карточки ниже — прогноз модели после обновления истории до конца доступных данных.")
 user = next((u for u in data["users"] if u["id"] == selected), None)
-personalized = method == "Персональная модель" and user is not None
+personalized = method == personal_label and user is not None
 recs = user["recommendations"] if personalized else data["popular"]
 st.divider()
 st.subheader("Подборка для вас" if personalized else "Популярные товары")
 if user is None:
     st.caption("Для нового покупателя используем популярность: личной истории пока нет.")
+elif personalized and data.get("serving_method") == "hybrid":
+    st.caption("Показана выдача гибрида с фиксированными весами. Метод выбран по трём более ранним неделям.")
 
 import html
 colours = {"Black": "#363a35", "Cream": "#baa986", "Blue": "#617c92", "Olive": "#7a8261",
@@ -97,10 +101,26 @@ if user:
             for a in user["history"]
         ], hide_index=True, use_container_width=True)
 with st.expander("Как проверяли качество"):
-    st.write("Сначала формируем кандидатов: популярность за 7/28 дней, повторные покупки, соседние товары в истории. "
-             "Затем модель градиентного бустинга оценивает вероятность следующей покупки.")
+    st.write("Сначала формируем кандидатов из популярных товаров, истории и связей между покупками. "
+             "Затем сравниваем фиксированное взвешивание сигналов и модель градиентного бустинга для ранжирования.")
     st.write("Обучающая неделя предшествует проверочной. Признаки каждой недели используют только прошлое. "
              "Оценка включает покупателей без истории, если они покупали в проверочную неделю.")
     st.write("Подписи на карточках описывают доступные сигналы, а не причинное объяснение решения модели.")
+    st.caption("Метрики cold/warm и охват каталога в JSON относятся к обучаемой модели.")
     st.json(data["metrics"])
+
+comparison_path = Path("artifacts/comparison/comparison.json")
+if comparison_path.exists():
+    comparison = load(str(comparison_path), comparison_path.stat().st_mtime_ns)
+    with st.expander("Сравнение на четырёх неделях"):
+        st.write("Три ранние недели использовались для выбора варианта. Последняя — повторная контрольная проверка: "
+                 "этот период уже оценивался в первой версии проекта.")
+        rows = []
+        for week in comparison["weeks"]:
+            for variant, metrics in week["variants"].items():
+                rows.append({"Неделя": week["start"], "Подбор": "Расширенный" if variant == "expanded" else "Исходный",
+                             "MAP@12 · гибрид": metrics["map_at_12"]["hybrid"],
+                             "MAP@12 · модель": metrics["map_at_12"]["learned"],
+                             "Охват будущих покупок кандидатами": metrics["candidate_recall"]})
+        st.dataframe(rows, hide_index=True, use_container_width=True)
 

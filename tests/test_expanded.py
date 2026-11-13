@@ -7,7 +7,7 @@ from fashion_recs.data import synthetic_data
 from fashion_recs.expanded import ExpandedCandidateEngine
 from fashion_recs.model import CandidateEngine
 from fashion_recs.experiment import run_comparison
-from fashion_recs.pipeline import run
+from fashion_recs.pipeline import run, week_labels
 
 
 def test_expansion_adds_category_and_product_variants_without_future_items():
@@ -71,4 +71,6 @@ def test_selected_serving_export_matches_hybrid_predictions(tmp_path):
     demo = json.loads((tmp_path / "demo.json").read_text(encoding="utf-8"))
     assert model["serving_method"] == demo["serving_method"] == "hybrid"
     assert report["engine_class"] == "ExpandedCandidateEngine"
-    assert len(model["engine"].recommend("demo-0000", "hybrid")) == 12
+    labels, _ = week_labels(tx, end - pd.Timedelta(days=7), max_users=20, seed=42)
+    first_user = next(iter(labels))
+    assert demo["users"][0]["recommendations"] == model["engine"].recommend(first_user, "hybrid")
