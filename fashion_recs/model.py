@@ -104,6 +104,11 @@ def fit_ranker(engine, labels, seed=42):
         targets.extend(int(item in truth) for item in ids)
     x = np.concatenate(rows)
     y = np.asarray(targets)
+    ranker = fit_pointwise(x, y, seed)
+    return ranker, {"rows": len(y), "positives": int(y.sum()), "features": FEATURES}
+
+
+def fit_pointwise(x, y, seed=42):
     if len(np.unique(y)) < 2:
         raise ValueError("Training candidates contain no positive examples; increase training users")
     # Fixed iteration count; sklearn's default random validation split is disabled.
@@ -112,5 +117,5 @@ def fit_ranker(engine, labels, seed=42):
         learning_rate=0.08, l2_regularization=3.0, early_stopping=False, random_state=seed,
     )
     ranker.fit(x, y, sample_weight=np.where(y == 1, 15.0, 1.0))
-    return ranker, {"rows": len(y), "positives": int(y.sum()), "features": FEATURES}
+    return ranker
 
